@@ -5,7 +5,7 @@ using System;
 
 namespace testGame
 {
-    class Balloons
+    public class Balloons
     {
         Texture2D _balloon, _balloon2, _balloon3;
         Vector2 _balloonPos, _balloonOrig, _balloon2Pos, _balloon2Orig, _balloon3Pos;
@@ -25,10 +25,16 @@ namespace testGame
             _balloon2Rot = 1.0f;
             _balloon3Rot = 1.0f;
         }
-        public void Update(GameTime gameTime, InputHelper inputHelper, GraphicsDeviceManager _graphics)
+
+        public void HandleInput(InputHelper inputHelper)
         {
-            redComponent = gameTime.TotalGameTime.Milliseconds / 8;
-            greenComponent = gameTime.TotalGameTime.Milliseconds / 1;
+
+            _balloonPos = inputHelper.MousePos - _balloonOrig;
+        }
+        public void Update(GameTime gameTime, GraphicsDeviceManager _graphics)
+        {
+            redComponent = gameTime.TotalGameTime.Milliseconds / 5;
+            greenComponent = gameTime.TotalGameTime.Milliseconds / 5;
             blueComponent = gameTime.TotalGameTime.Milliseconds / 20;
 
             _pulsing = new Color(redComponent, 0, 0);
@@ -38,7 +44,6 @@ namespace testGame
             _balloon3R = 120.0f;
 
             _balloonOrig = new Vector2(_balloon.Width / 2, _balloon.Height / 2);
-            _balloonPos = inputHelper.MousePos - _balloonOrig;
             _balloon2Rot += 0.1f;
             _balloon2Pos = new Vector2((float)Math.Cos(_balloon2Rot) * _balloon2R,
                 (float)Math.Sin(_balloon2Rot) * _balloon2R);
