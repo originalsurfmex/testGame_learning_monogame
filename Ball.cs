@@ -73,11 +73,20 @@ namespace testGame
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (Painter.GameWorld.Cannon.ColorGetset == Color.Red)
+            {
                 _currentBall = _ballsRed;
+                _ballColor = Color.Red;
+            }
             else if (Painter.GameWorld.Cannon.ColorGetset == Color.Green)
+            {
                 _currentBall = _ballsGreen;
+                _ballColor = Color.Green;
+            }
             else
+            {
                 _currentBall = _ballsBlue;
+                _ballColor = Color.Blue;
+            }
 
             spriteBatch.Draw(_currentBall, _ballPos, null, Color.White, 0.0f, _ballOrig,
                1.0f, SpriteEffects.None, 0);
@@ -89,9 +98,21 @@ namespace testGame
             set { _currentBall = value; }
         }
 
+        public Color Color { get { return _ballColor; } }
+
         public bool Shooting
         {
             get { return _shooting; }
         }
+        public Rectangle BBox
+        {
+            get
+            {
+                Rectangle spriteBound = _ballsBlue.Bounds;
+                spriteBound.Offset(_ballPos - _ballOrig);
+                return spriteBound;
+            }
+        }
+
     }
 }

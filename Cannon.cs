@@ -24,12 +24,12 @@ namespace testGame
 
         public void HandleInput(InputHelper inputHelper)
         {
-        
+
             // helper boolean, checks if the mouse was clicked after a release using a previous state variable
             if (inputHelper.MouseClick)
                 _calcCannonRot = !_calcCannonRot;
             if (_calcCannonRot)
-                _cannonRot = (float)Math.Atan2(inputHelper.MousePos.Y - _cannonPos.Y, 
+                _cannonRot = (float)Math.Atan2(inputHelper.MousePos.Y - _cannonPos.Y,
                     inputHelper.MousePos.X - _cannonPos.X);
             else
                 _cannonRot = 0.0f;
