@@ -8,22 +8,21 @@ namespace testGame
 {
     public class Cannon : ThreeColorObject
     {
-        bool _calcCannonRot;
         public Cannon(ContentManager Content) //only one sprite per color on the cannon
             : base(Content, "images/spr_cannon_barrel", "images/spr_cannon_barrel", "images/spr_cannon_barrel")
         {
             _objOrig = new Vector2(_objCurrent.Height, _objCurrent.Height) / 2;
             _objPos = new Vector2(40 + _objOrig.X, 375 + _objOrig.Y);
-
+            CannonRotate = false;
         }
 
-        public void HandleInput(InputHelper inputHelper)
+        public override void HandleInput(InputHelper inputHelper)
         {
 
             // helper boolean, checks if the mouse was clicked after a release using a previous state variable
             if (inputHelper.MouseClick)
-                _calcCannonRot = !_calcCannonRot;
-            if (_calcCannonRot)
+                CannonRotate = !CannonRotate;
+            if (CannonRotate)
                 _objRot = (float)Math.Atan2(inputHelper.MousePos.Y - _objPos.Y,
                     inputHelper.MousePos.X - _objPos.X);
             else
@@ -36,12 +35,8 @@ namespace testGame
                 _currentCol = inputHelper.ColorSwitcher(_currentCol);
             }
         }
- 
-        public bool CannonRotate
-        {
-            get { return _calcCannonRot; }
-            set { _calcCannonRot = value; }
-        }
+
+        public bool CannonRotate { get; set; }
 
         //-----------------------------------------------------
         public Vector2 BallPos

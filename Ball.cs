@@ -4,112 +4,51 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace testGame
 {
-    public class Ball
+    public class Ball : ThreeColorObject
     {
-        private Texture2D _currentBall, _ballsBlue, _ballsRed, _ballsGreen;
-        private Vector2 _ballOrig, _ballOrigTex, _ballPos, _velocity;
-        private Color _ballColor;
-        private float _ballAng;
-        private bool _shooting;
-
-        public Ball(ContentManager Content)
+        public Ball(ContentManager Content) :
+            base(Content, "images/spr_ball_red", "images/spr_ball_green", "images/spr_ball_blue")
         {
-            _currentBall = Content.Load<Texture2D>("images/spr_ball_blue");
-            _ballsBlue = Content.Load<Texture2D>("images/spr_ball_blue");
-            _ballsRed = Content.Load<Texture2D>("images/spr_ball_red");
-            _ballsGreen = Content.Load<Texture2D>("images/spr_ball_green");
-
-            _ballOrigTex = new Vector2(_ballsBlue.Width, _ballsBlue.Height) / 2;
-
-            _shooting = false;
+            Shooting = false;
         }
 
-        public void HandleInput(InputHelper inputHelper)
+        public override void HandleInput(InputHelper inputHelper)
         {
-            if (inputHelper.MouseLeftButton() && !_shooting)
+            if (inputHelper.MouseLeftButton() && !Shooting)
             {
-                _shooting = true;
+                Shooting = true;
                 //subtracting vectors is like shooting an arrow, mousePos is built-in magnitude too
-                _velocity = (inputHelper.MousePos - Painter.GameWorld.Cannon.BallPos) * 2.1f;
+                _objVelocity = (inputHelper.MousePos - Painter.GameWorld.Cannon.BallPos) * 2.1f;
             }
         }
 
-        public void Reset()
+        public override void Reset()
         {
             // reset ball location within Update, otherwise glitches
-            _ballColor = Color.Blue;
-            _velocity = Vector2.Zero;
-            _shooting = false;
+            Shooting = false;
             Painter.GameWorld.Cannon.CannonRotate = false;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _ballAng = Painter.GameWorld.Cannon.Angle;
-            _ballOrig = Painter.GameWorld.Cannon.Origin + new Vector2(90, -20);
+            _currentCol = Painter.GameWorld.Cannon.ColorGetSet;
+            _objOrig = Painter.GameWorld.Cannon.Origin + new Vector2(80, -25);
 
             //this is where ball location is dictated
-            if (_shooting)
+            if (Shooting)
             {
-                _ballPos += _velocity * dt;
-                _velocity.Y += 400.0f * dt;
-                _currentBall = _ballsRed;
+                _objPos += _objVelocity * _dt;
+                _objVelocity.Y += 400.0f * _dt;
             }
             else
-            {
-                _ballPos = Painter.GameWorld.Cannon.BallPos;
-            }
+                _objPos = Painter.GameWorld.Cannon.BallPos;
 
-            if (!Painter.GameWorld.InWorld(_ballPos))
-            {
+            if (!Painter.GameWorld.InWorld(_objPos))
                 Reset();
-            }
+
+            base.Update(gameTime);
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (Painter.GameWorld.Cannon.ColorGetset == Color.Red)
-            {
-                _currentBall = _ballsRed;
-                _ballColor = Color.Red;
-            }
-            else if (Painter.GameWorld.Cannon.ColorGetset == Color.Green)
-            {
-                _currentBall = _ballsGreen;
-                _ballColor = Color.Green;
-            }
-            else
-            {
-                _currentBall = _ballsBlue;
-                _ballColor = Color.Blue;
-            }
-
-            spriteBatch.Draw(_currentBall, _ballPos, null, Color.White, 0.0f, _ballOrig,
-               1.0f, SpriteEffects.None, 0);
-        }
-
-        public Texture2D BallTex
-        {
-            get { return _currentBall; }
-            set { _currentBall = value; }
-        }
-
-        public Color Color { get { return _ballColor; } }
-
-        public bool Shooting
-        {
-            get { return _shooting; }
-        }
-        public Rectangle BBox
-        {
-            get
-            {
-                Rectangle spriteBound = _ballsBlue.Bounds;
-                spriteBound.Offset(_ballPos - _ballOrig);
-                return spriteBound;
-            }
-        }
-
+        public bool Shooting { get; private set; }
     }
 }

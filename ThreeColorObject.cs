@@ -12,7 +12,7 @@ namespace testGame
         Color _Red, _Green, _Blue;
         protected Color _currentCol;
         protected Vector2 _objOrig, _objTexOrig, _objPos, _objVelocity;
-        protected float _objRot, _objVelFactor;
+        protected float _dt, _objRot, _objVelFactor;
         bool _rotating;
 
         protected ThreeColorObject(ContentManager Content, string redSprite, 
@@ -39,7 +39,7 @@ namespace testGame
             _objVelFactor = 1.0f; //velocity factor/multiplier
         }
 
-        public virtual void HandleInput()
+        public virtual void HandleInput(InputHelper inputHelper)
         {
 
         }
@@ -53,8 +53,8 @@ namespace testGame
 
         public virtual void Update(GameTime gameTime)
         {
-            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _objPos += _objVelocity * _objVelFactor * dt;
+            _dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _objPos += _objVelocity * _objVelFactor * _dt;
         }
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -94,7 +94,7 @@ namespace testGame
             get { return _objCurrent; }
         }
 
-        public Color ColorGetset
+        public Color ColorGetSet
         {
             get { return _currentCol; }
             protected set

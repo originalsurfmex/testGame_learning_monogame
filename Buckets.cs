@@ -70,9 +70,9 @@ namespace testGame
             //collisions and color reset and lose a life
             if (BBox.Intersects(Painter.GameWorld.Ball.BBox))
             {
-                if (_targetColor != Painter.GameWorld.Ball.Color)
+                if (_targetColor != Painter.GameWorld.Ball.ColorGetSet)
                     Painter.GameWorld.LoseLife();
-                if (_targetColor == Painter.GameWorld.Ball.Color)
+                if (_targetColor == Painter.GameWorld.Ball.ColorGetSet)
                 {
                     Reset();
                 }
