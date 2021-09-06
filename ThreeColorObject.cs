@@ -29,7 +29,6 @@ namespace testGame
 
             //object origin and position vectors
             _objOrig = new Vector2(_objCurrent.Height, _objCurrent.Width) / 2;
-            //_objPos = new Vector2(_objOrig.X, _objOrig.Y);
             _objPos = Vector2.Zero;
             _objVelocity = Vector2.Zero;
             _objRot = 0.0f;

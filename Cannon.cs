@@ -38,7 +38,6 @@ namespace testGame
 
         public bool CannonRotate { get; set; }
 
-        //-----------------------------------------------------
         public Vector2 BallPos
         {
             get

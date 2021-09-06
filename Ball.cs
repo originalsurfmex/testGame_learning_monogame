@@ -31,6 +31,7 @@ namespace testGame
 
         public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             _currentCol = Painter.GameWorld.Cannon.ColorGetSet;
             _objOrig = Painter.GameWorld.Cannon.Origin + new Vector2(80, -25);
 
@@ -45,8 +46,6 @@ namespace testGame
 
             if (!Painter.GameWorld.InWorld(_objPos))
                 Reset();
-
-            base.Update(gameTime);
         }
 
         public bool Shooting { get; private set; }
