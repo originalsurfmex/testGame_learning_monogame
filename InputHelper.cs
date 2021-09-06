@@ -5,10 +5,10 @@ namespace testGame
 {
     public class InputHelper
     {
-        Vector2 _mousePos;
-        MouseState _mouse, _mousePrev;
-        KeyboardState _key, _keyPrev;
-        bool _mouseClick;
+        private Vector2 _mousePos;
+        private MouseState _mouse, _mousePrev;
+        private KeyboardState _key, _keyPrev;
+        private bool _mouseClick;
 
         public void Update()
         {
@@ -42,5 +42,21 @@ namespace testGame
         {
             return _key.IsKeyDown(key) && _keyPrev.IsKeyUp(key);
         }
-    }
+
+        //i couldnt get this to work
+        public Color ColorSwitcher(Color color)
+        {
+            if (KeyPressed(Keys.R))
+                color = Color.Red;
+            else if (KeyPressed(Keys.G))
+                color = Color.Green;
+            else if (KeyPressed(Keys.B))
+                color  = Color.Blue;
+            else
+                color = color;
+
+            return color;
+        }
+
+}
 }

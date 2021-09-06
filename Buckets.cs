@@ -6,11 +6,12 @@ namespace testGame
 {
     internal class Buckets
     {
-        private Texture2D _bucketCurrent, _bucketRed, _bucketGreen, _bucketBlue,
+        private Texture2D _bucketCurrent; 
+        private readonly Texture2D _bucketRed, _bucketGreen, _bucketBlue,
             _bucketLives;
         private Vector2 _bucketPos, _bucketOrig;
-        private Color _color, _targetColor, _bucketCurrentCol;
-        private float _velocity;
+        private Color _color, _targetColor;
+        private readonly float _velocityMult;
         private float _difficulty;
 
         public Buckets(ContentManager Content, float position, Color target)
@@ -26,7 +27,7 @@ namespace testGame
             _bucketPos.X += position;
 
             _targetColor = target;
-            _velocity = 50.0f;
+            _velocityMult = 50.0f;
             //_difficulty = 1.2f;
             _difficulty = 1.0f + (float)Painter.Random.NextDouble();
 
@@ -44,7 +45,7 @@ namespace testGame
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //gravity
-            _bucketPos.Y += _velocity * _difficulty * dt;
+            _bucketPos.Y += _velocityMult * _difficulty * dt;
 
             //gameworld bounds and lose a life
             if (!Painter.GameWorld.InWorld(_bucketPos - _bucketOrig) &&

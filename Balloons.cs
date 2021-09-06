@@ -40,16 +40,16 @@ namespace testGame
             _pulsing = new Color(redComponent, 0, 0);
 
 
-            _balloon2R = 70.0f;
-            _balloon3R = 120.0f;
+            _balloon2R = 150.0f;
+            _balloon3R = _balloon2R * 0.5f;
 
             _balloonOrig = new Vector2(_balloon.Width / 2, _balloon.Height / 2);
             _balloon2Rot += 0.1f;
             _balloon2Pos = new Vector2((float)Math.Cos(_balloon2Rot) * _balloon2R,
                 (float)Math.Sin(_balloon2Rot) * _balloon2R);
-            _balloon2Orig = new Vector2(_graphics.PreferredBackBufferWidth / 2,
-                _graphics.PreferredBackBufferHeight / 2);
-            _balloon3Rot += 0.05f;
+            _balloon2Orig = new Vector2(Painter.ScreenSize.X - Painter.ScreenSize.X / 4,
+                Painter.ScreenSize.Y / 2 - _balloon.Height / 2);
+            _balloon3Rot += 0.15f;
             _balloon3Pos = new Vector2((float)Math.Cos(_balloon2Rot) * _balloon3R,
                 (float)Math.Sin(_balloon2Rot) * _balloon3R);
             _balloon2Pos += _balloon2Orig; //vector math here

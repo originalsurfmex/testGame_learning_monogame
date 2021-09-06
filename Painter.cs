@@ -32,7 +32,7 @@ namespace testGame
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
             _inputHelper = new InputHelper();
             Random = new Random();
 

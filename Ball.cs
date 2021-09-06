@@ -61,9 +61,6 @@ namespace testGame
                 _ballPos = Painter.GameWorld.Cannon.BallPos;
             }
 
-            //on screen or off screen
-            //if (_ballPos.X >= Painter.ScreenSize.X + 100 ||
-            //    _ballPos.Y >= Painter.ScreenSize.Y + 100)
             if (!Painter.GameWorld.InWorld(_ballPos))
             {
                 Reset();
