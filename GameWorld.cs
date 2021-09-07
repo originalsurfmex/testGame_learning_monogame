@@ -7,19 +7,25 @@ namespace testGame
 {
     public class GameWorld
     {
-        Texture2D _background, _gameover;
-        Balloons _balloons;
-        Cannon _cannon;
-        Ball _ball;
-        Buckets _bucket1, _bucket2, _bucket3;
-
+        private readonly Texture2D _background;
+        private readonly Texture2D _gameover;
+        readonly Balloons _balloons;
+        readonly Cannon _cannon;
+        readonly Ball _ball;
+        private readonly Buckets _bucket1;
+        private readonly Buckets _bucket2;
+        private readonly Buckets _bucket3;
         int _lives;
+        readonly Texture2D _scoreBar;
+        readonly SpriteFont _gameFont;
 
 
         public GameWorld(ContentManager Content)
         {
             _background = Content.Load<Texture2D>("images/spr_background");
             _gameover = Content.Load<Texture2D>("images/spr_gameover");
+            _scoreBar = Content.Load<Texture2D>("images/spr_scorebar");
+            _gameFont = Content.Load<SpriteFont>("fonts/PainterFont");
             _balloons = new Balloons(Content);
             _cannon = new Cannon(Content);
             _ball = new Ball(Content);
@@ -29,6 +35,7 @@ namespace testGame
             _bucket3 = new Buckets(Content, 610.0f, Color.Green);
 
             _lives = 5;
+            Score = 0;
         }
 
         public void HandleInput(InputHelper inputHelper)
@@ -46,6 +53,8 @@ namespace testGame
         public void Reset()
         {
             _lives = 5;
+            Score = 0;
+
             _cannon.Reset();
             _ball.Reset();
             _bucket1.Reset();
@@ -79,6 +88,9 @@ namespace testGame
                 _bucket1.Draw(gameTime, spriteBatch);
                 _bucket2.Draw(gameTime, spriteBatch);
                 _bucket3.Draw(gameTime, spriteBatch);
+
+                spriteBatch.Draw(_scoreBar, new Vector2(10, 10), Color.White);
+                spriteBatch.DrawString(_gameFont, "Score: " + Score, new Vector2(20, 18), Color.White);
             }
             else
             {
@@ -111,5 +123,7 @@ namespace testGame
             get { return _lives > 0; }
         }
         public Ball Ball { get { return _ball; } }
+
+        public int Score { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
@@ -29,7 +28,7 @@ namespace testGame
                 _objRot = 0.0f;
 
             // get that RGB son, needs to be improved so its not so heavy...just get a key
-            if (inputHelper.KeyPressed(Keys.R) || inputHelper.KeyPressed(Keys.G) || 
+            if (inputHelper.KeyPressed(Keys.R) || inputHelper.KeyPressed(Keys.G) ||
                 inputHelper.KeyPressed(Keys.B))
             {
                 _currentCol = inputHelper.ColorSwitcher(_currentCol);

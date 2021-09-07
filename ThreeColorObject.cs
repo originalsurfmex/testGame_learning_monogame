@@ -1,21 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace testGame
 {
     public class ThreeColorObject
     {
         protected Texture2D _objCurrent, _objRed, _objGreen, _objBlue;
-        Color _Red, _Green, _Blue;
         protected Color _currentCol;
         protected Vector2 _objOrig, _objTexOrig, _objPos, _objVelocity;
         protected float _dt, _objRot, _objVelFactor;
-        bool _rotating;
 
-        protected ThreeColorObject(ContentManager Content, string redSprite, 
+        protected ThreeColorObject(ContentManager Content, string redSprite,
             string greenSprite, string blueSprite)
         {
             //sprite textures
@@ -40,7 +36,6 @@ namespace testGame
 
         public virtual void HandleInput(InputHelper inputHelper)
         {
-
         }
 
         public virtual void Reset()
@@ -66,33 +61,13 @@ namespace testGame
                 _objCurrent = _objBlue;
 
             // draw the object sprite
-            spriteBatch.Draw(_objCurrent, _objPos, null, _currentCol, _objRot, 
+            spriteBatch.Draw(_objCurrent, _objPos, null, _currentCol, _objRot,
                 _objOrig, 1.0f, SpriteEffects.None, 0);
         }
-
-        public Vector2 Position
-        {
-            get { return _objPos; }
-            set { _objPos = value; }
-        }
-
-        public float Angle
-        {
-            get { return _objRot; }
-            set { _objRot = value; }
-        }
-
         public Vector2 Origin
         {
             get { return _objOrig; }
-            set { _objOrig = value; }
         }
-
-        public Texture2D Tex
-        {
-            get { return _objCurrent; }
-        }
-
         public Color ColorGetSet
         {
             get { return _currentCol; }
@@ -103,13 +78,6 @@ namespace testGame
                 _currentCol = value;
             }
         }
-
-        public bool Rotation
-        {
-            get { return _rotating; }
-            set { _rotating = value; }
-        }
-
         public Rectangle BBox
         {
             get

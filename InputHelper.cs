@@ -51,12 +51,10 @@ namespace testGame
             else if (KeyPressed(Keys.G))
                 color = Color.Green;
             else if (KeyPressed(Keys.B))
-                color  = Color.Blue;
-            else
-                color = color;
+                color = Color.Blue;
 
             return color;
         }
 
-}
+    }
 }

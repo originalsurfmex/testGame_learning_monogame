@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
+using System;
 
 namespace testGame
 {
@@ -8,6 +10,7 @@ namespace testGame
     {
         private readonly Texture2D _bucketLives;
         private float _difficulty;
+        readonly SoundEffect _sndScore;
 
         public Buckets(ContentManager Content, float position, Color target) :
             base(Content, "images/spr_can_red", "images/spr_can_green", "images/spr_can_blue")
@@ -18,6 +21,10 @@ namespace testGame
             _currentCol = target;
             _objVelFactor = 50.0f;
             _difficulty = 1.0f + (float)Painter.Random.NextDouble();
+
+            _sndScore = Content.Load<SoundEffect>("sounds/snd_collect_points");
+
+
         }
 
         public override void Reset()
@@ -29,6 +36,9 @@ namespace testGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            //sway the buckets back and forth
+            _objRot = (float)Math.Sin(_objPos.Y / 50) * 0.15f;
 
             //gravity
             _objPos.Y += _objVelFactor * _difficulty * _dt;
@@ -50,9 +60,12 @@ namespace testGame
             {
                 if (_currentCol != Painter.GameWorld.Ball.ColorGetSet)
                     Painter.GameWorld.LoseLife();
-                if (_currentCol == Painter.GameWorld.Ball.ColorGetSet)
+                else if (_currentCol == Painter.GameWorld.Ball.ColorGetSet)
+                {
+                    Painter.GameWorld.Score += 10;
+                    _sndScore.Play();
                     Reset();
-
+                }
                 Painter.GameWorld.Ball.Reset();
             }
         }
@@ -61,7 +74,7 @@ namespace testGame
         {
             base.Draw(gameTime, spriteBatch);
 
-            spriteBatch.Draw(_objCurrent, _objPos, null, Color.White, 0.0f,
+            spriteBatch.Draw(_objCurrent, _objPos, null, Color.White, _objRot,
                 _objOrig, 1.0f, SpriteEffects.None, 0);
         }
 

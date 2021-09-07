@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin ../../csharpgames-master/Code and Assets/Assets/Painter/snd_music.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:../../csharpgames-master/Code and Assets/Assets/Painter/snd_music.wma;sounds/snd_music.wma
+
 #begin ../../csharpgames-master/Code and Assets/Assets/Painter/spr_background.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -84,6 +90,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../csharpgames-master/Code and Assets/Assets/Painter/spr_lives.png;images/spr_lives.png
+
+#begin fonts/PainterFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/PainterFont.spritefont
 
 #begin images/spr_background.jpg
 /importer:TextureImporter
@@ -253,9 +266,21 @@
 /processorParam:TextureFormat=Color
 /build:images/spr_scorebar.jpg
 
+#begin sounds/snd_collect_points.wma
+/importer:WmaImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/snd_collect_points.wma
+
 #begin sounds/snd_music.wma
 /importer:WmaImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:sounds/snd_music.wma
+
+#begin sounds/snd_shoot_paint.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/snd_shoot_paint.wav
 

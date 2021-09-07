@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 
 namespace testGame
@@ -9,7 +10,7 @@ namespace testGame
     {
         private static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private InputHelper _inputHelper;
+        private readonly InputHelper _inputHelper;
 
         private static GameWorld gameWorld;
 
@@ -52,6 +53,9 @@ namespace testGame
 
         protected override void LoadContent()
         {
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(Content.Load<Song>("sounds/snd_music"));
+            
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             gameWorld = new GameWorld(Content);
 

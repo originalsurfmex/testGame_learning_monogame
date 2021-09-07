@@ -1,15 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 
 namespace testGame
 {
     public class Ball : ThreeColorObject
     {
+        readonly SoundEffect _sndShooting;
         public Ball(ContentManager Content) :
             base(Content, "images/spr_ball_red", "images/spr_ball_green", "images/spr_ball_blue")
         {
             Shooting = false;
+            _sndShooting = Content.Load<SoundEffect>("sounds/snd_shoot_paint");
         }
 
         public override void HandleInput(InputHelper inputHelper)
@@ -19,6 +21,7 @@ namespace testGame
                 Shooting = true;
                 //subtracting vectors is like shooting an arrow, mousePos is built-in magnitude too
                 _objVelocity = (inputHelper.MousePos - Painter.GameWorld.Cannon.BallPos) * 2.1f;
+                _sndShooting.Play();
             }
         }
 
